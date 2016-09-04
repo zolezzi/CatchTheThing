@@ -14,7 +14,7 @@ import scala.collection.mutable.ArrayBuffer
 import ar.pablitar.vainilla.commons.math.Semiplane
 import ar.pablitar.vainilla.commons.inspectors.MathInspector
 
-class Catcher extends SpeedyComponent[CatchTheThingScene] {
+class Catcher(val shadow: CatcherShadow) extends SpeedyComponent[CatchTheThingScene] {
   private var _showDebug = false
   override def showDebug = _showDebug
   def showDebug_=(value: Boolean) = _showDebug = value
@@ -45,11 +45,14 @@ class Catcher extends SpeedyComponent[CatchTheThingScene] {
     
     this.speed = (speedX, 0.0)
     
+    this.setAppearanceAccordingToSpeed(speedX)
+    
     if(state.isKeyPressed(Key.D)) {
       this.showDebug = !this.showDebug
     }
     
     super.update(state)
+    shadow.position = this.position
   }
   
   override def render(graphics: Graphics2D) = {
@@ -65,6 +68,13 @@ class Catcher extends SpeedyComponent[CatchTheThingScene] {
   def caught(ball: Ball) = {
     Resources.macetaAnimation.reset()
     this.setAppearance(TimedAppearance.fromAnimationTo(this, Resources.macetaAnimation, Resources.macetaIdle))
+    shadow.onCaught()
+  }
+
+  def setAppearanceAccordingToSpeed(sp: Double) = {
+//    if(sp > 0) {
+//      this.setAppearance(x$1)
+//    } TODO
   }
 }
 
