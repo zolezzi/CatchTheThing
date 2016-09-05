@@ -37,6 +37,8 @@ class Catcher(val shadow: CatcherShadow) extends SpeedyComponent[CatchTheThingSc
   
   this.position = Vector2D(400, 500) 
   
+  shadow.position = this.position
+  
   override def update(state :DeltaState) = {
     val speedX:Double = 
       if(state.isKeyBeingHold(Key.RIGHT)) speedMagnitude 
