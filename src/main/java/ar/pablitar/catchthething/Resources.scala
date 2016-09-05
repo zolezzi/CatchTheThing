@@ -17,6 +17,9 @@ object Resources {
   val background = Sprite.fromImage("background.png")
 
   val sun = Sprite.fromImage("sun.png").center()
+  
+  val spriteSemilla = Sprite.fromImage("semilla.png").centerBottom()
+  spriteSemilla.setY(spriteSemilla.getY + 20)
 
   val macetaAnimation = animationFromSpritesheet(spritesheet, spriteWidth, spriteHeight, 0.04)
   val macetaShadowAnimation = animationFromSpritesheet(spritesheetShadow, spriteWidth, spriteHeight, 0.04)
