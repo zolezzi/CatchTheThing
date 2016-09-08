@@ -60,7 +60,7 @@ class Catcher(val shadow: CatcherShadow) extends SpeedyComponent[CatchTheThingSc
   override def render(graphics: Graphics2D) = {
     super.render(graphics)
     if(showDebug) {
-      graphics.drawRect(this.topLeft().x1.toInt, this.topLeft().x2.toInt + 10, this.width.toInt, 40)
+      graphics.drawRect(this.topLeft().x1.toInt + 30, this.topLeft().x2.toInt + 10, this.width.toInt -30 * 2, 20)
       walls.foreach { w => MathInspector.renderSemiplane(graphics, w) }
     }
   }

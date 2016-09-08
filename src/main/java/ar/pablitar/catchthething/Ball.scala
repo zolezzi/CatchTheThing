@@ -16,7 +16,7 @@ import ar.pablitar.vainilla.commons.inspectors.MathInspector
 import java.awt.geom.Point2D
 
 class Ball extends SpeedyComponent[CatchTheThingScene] {
-  val diameter = 20
+  val diameter = 40
   def radius = diameter / 2
 
   var catched = false
@@ -49,6 +49,7 @@ class Ball extends SpeedyComponent[CatchTheThingScene] {
     g.setTransform(newTransform)
     sprite.renderAt(0, 0, g)
     g.setTransform(beforeTransform)
+//    g.drawOval((this.position.x1 - radius).toInt, (this.position.x2 - radius).toInt, this.diameter, this.diameter)
   }
   
   def drawAngle = this.speed.angle - Math.PI / 2
@@ -63,7 +64,7 @@ class Ball extends SpeedyComponent[CatchTheThingScene] {
     (result.getX, result.getY)
   }
 
-  val collisionMargin = 20
+  val collisionMargin = 30
 
   private def transform() = {
     val newTransform = AffineTransform.getTranslateInstance(this.getX, this.getY)
@@ -75,7 +76,7 @@ class Ball extends SpeedyComponent[CatchTheThingScene] {
     CollisionDetector.INSTANCE
       .collidesCircleAgainstRect(
         this.position.x1 - radius, this.position.x2 - radius, this.radius,
-        catcher.topLeft().x1 + collisionMargin, catcher.topLeft().x2 + 10, catcher.width - collisionMargin * 2, this.height)
+        catcher.topLeft().x1 + collisionMargin, catcher.topLeft().x2 + 10, catcher.width - collisionMargin * 2, this.radius)
   }
 
   def onCaught() = {

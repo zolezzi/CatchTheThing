@@ -26,7 +26,7 @@ class BallSpawner extends GameComponent[CatchTheThingScene] {
   }
 
   def generateCooldown = {
-    (Random.nextDouble() * 1) + 0.5
+    (Random.nextDouble() * 0.5) + 0.2
   }
 }
 
