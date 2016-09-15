@@ -1,5 +1,6 @@
 package ar.pablitar.catchthething
 
+
 import com.uqbar.vainilla.GameComponent
 import com.uqbar.vainilla.appearances.Rectangle
 import java.awt.Color
@@ -40,20 +41,29 @@ class Catcher(val shadow: CatcherShadow) extends SpeedyComponent[CatchTheThingSc
   shadow.position = this.position
   
   override def update(state :DeltaState) = {
-    val speedX:Double = 
-      if(state.isKeyBeingHold(Key.RIGHT)) speedMagnitude 
-      else if(state.isKeyBeingHold(Key.LEFT)) -speedMagnitude
-      else 0.0
+    var speedX:Double = 0.0
+      
+        if(state.isKeyBeingHold(Key.RIGHT)){ 
+          speedX = speedMagnitude 
+        }
+        if(state.isKeyBeingHold(Key.LEFT)) {
+          speedX = -speedMagnitude
+        }
     
     this.speed = (speedX, 0.0)
+   
+
     
-    this.setAppearanceAccordingToSpeed(speedX)
+   // this.setAppearanceAccordingToSpeed(speedX)
     
     if(state.isKeyPressed(Key.D)) {
       this.showDebug = !this.showDebug
     }
+
     
     super.update(state)
+    this.fueraDelLimite()
+    
     shadow.position = this.position
   }
   
@@ -73,6 +83,32 @@ class Catcher(val shadow: CatcherShadow) extends SpeedyComponent[CatchTheThingSc
     shadow.onCaught()
   }
 
+  
+  def fueraDelLimite(){
+	  
+    if(this.position.x1 >= 900.0 ){
+		  this.position = (50.0, 500.0)
+	  }else if (this.position.x1 <= 0.0){
+		  this.position = (800.0 , 500.0)
+	  }
+    
+  }
+  
+  def chequearScore = {
+
+    if (this.getScene.getScore < 0) {
+      this.death
+    }
+  }
+    def death: Unit = {
+      this.getScene.gameOver
+      this.getScene.removeComponent(shadow)
+      this.getScene.removeComponent(this)
+      shadow.destroy()
+      this.destroy
+    }
+    
+    
   def setAppearanceAccordingToSpeed(sp: Double) = {
 //    if(sp > 0) {
 //      this.setAppearance(x$1)

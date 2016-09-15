@@ -1,5 +1,4 @@
 package ar.pablitar.catchthething
-
 import com.uqbar.vainilla.appearances.Sprite
 import com.uqbar.vainilla.appearances.Animation
 
@@ -17,6 +16,12 @@ object Resources {
   val background = Sprite.fromImage("background.png")
 
   val sun = Sprite.fromImage("sun.png").center()
+  
+  val spriteExplosion = Sprite.fromImage("explosion.png").center()
+  
+  val spritePoo = Sprite.fromImage("poo.png").center()
+  
+  val spriteBoom = Sprite.fromImage("boom.png").center()
   
   val spriteSemilla = Sprite.fromImage("semilla.png").centerBottom()
   spriteSemilla.setY(spriteSemilla.getY + 20)
