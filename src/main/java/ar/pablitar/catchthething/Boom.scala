@@ -40,6 +40,7 @@ class Boom extends SpeedyComponent[CatchTheThingScene]{
     if (this.isCollidedBy(catcher) && !colisiono) {
       this.collision()
       this.catcher.death
+      this.crearExplosionPorCollision
     }else if (colisiono) {
       this.checkCollisionWithCatcher
      }else {
@@ -47,6 +48,14 @@ class Boom extends SpeedyComponent[CatchTheThingScene]{
     }
       this.crearExplosion
   }
+  
+  def crearExplosionPorCollision {
+    val e = new Explosion()
+    e.position = Vector2D(catcher.position.x1, 400)
+    this.getScene.addComponent(e) 
+    this.destroy()
+  }
+  
   
   def crearExplosion {
     if(this.position.x2 >= 500){
