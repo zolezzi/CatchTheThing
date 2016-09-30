@@ -31,6 +31,7 @@ class Ball extends SpeedyComponent[CatchTheThingScene] {
     super.update(state)
     if (this.isCatchedBy(catcher) && !catched) {
       this.onCaught()
+      this.getScene.sumScore
       catcher.caught(this)
     } else if (catched) {
       this.checkCollisionWithCatcherWalls()
